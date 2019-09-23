@@ -1,6 +1,8 @@
 package com.example.text;
 
 
+import com.example.text.model.TestClass;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -14,36 +16,23 @@ import java.util.List;
  */
 public class FileCreater {
 
-     class TestClass {
-        String test1;
-        String test2;
-        int i;
 
-         @Override
-         public String toString() {
-             return "TestClass{" +
-                     "test1='" + test1 + '\'' +
-                     ", test2='" + test2 + '\'' +
-                     ", i=" + i +
-                     '}';
-         }
-     }
 
     public static String getLines(TestClass data) {
         return data.toString();
     }
 
     public TestClass createTestClass(String test1, String test2, int i) {
-        FileCreater.TestClass testClass = new FileCreater.TestClass();
-        testClass.test1 = test1;
-        testClass.test2 = test2;
-        testClass.i =i;
+        TestClass testClass = new TestClass(test1, test2, i);
+        testClass.setTest1(test1);
+        testClass.setTest2(test2);
+        testClass.setI(i);
         return testClass;
     }
 
     public static void main(String args[]) throws IOException {
          FileCreater creater = new FileCreater();
-        List<String> lines = Arrays.asList(getLines(creater.createTestClass("Test1", "Is", 1)), getLines(creater.createTestClass("Test2", "Is", 2)));
+        List<String> lines = Arrays.asList(getLines(creater.createTestClass("Test xL", "Is", 1)), getLines(creater.createTestClass("Test2", "Is", 2)));
         Path file = Paths.get("the-file-name.txt");
         Files.write(file, lines, StandardCharsets.UTF_8);
 
